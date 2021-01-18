@@ -17,7 +17,7 @@ Change the name of the file when you enter the problem number.
 ## TODO
 * ~~입력한 문제 번호에 따라 크롤링~~
 * ~~문제 티어, 제목, 설명 크롤링~~
-* 파일명 바꾸기
+* 파일을 특정 디렉토리로 복사 및 이름 바꾸기
 * 파일안에 해당 문제의 주소 및 알고리즘 주석으로 추가하기 
-* GUI
+* PyQt5를 이용해 GUI 구현
 
