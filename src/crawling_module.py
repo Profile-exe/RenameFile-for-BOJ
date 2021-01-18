@@ -38,7 +38,7 @@ class Crawl:    # 크롤링 클래스
 		SOL_html = get_html(SOL_URL, {'query': prbNum})
 		SOL_soup = BeautifulSoup(SOL_html, 'html.parser')
 
-		problem_tier = SOL_soup.select('a[href = "{0}"] > img'.format(BOJ_URL))[0]['alt']   # 티어 저장
+		problem_tier = SOL_soup.select(f'a[href = "{BOJ_URL}"] > img')[0]['alt']   # 티어 저장
 		
 		return {    # 딕셔너리 형태로 데이터 반환
 			'tier': problem_tier,
