@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 def get_html(url, query):  # 해당 사이트의 html 파일을 text로 변환하여 불러온다.
 	_html = ""
 	resp = requests.get(url, query)
-	print(resp.url)
+	print('주소', resp.url)              # URL 출력
 	if resp.status_code == 200:  # 정상적인 응답 [200] 이면 text로 변환
 		_html = resp.text
 	return _html
@@ -23,12 +23,6 @@ class Crawl:    # 크롤링 클래스
 			print('입력없음, 프로그램 종료')
 			exit(0)
 
-		# solved ac
-		SOL_URL = "https://solved.ac/search"
-		SOL_html = get_html(SOL_URL, query={'query': prbNum})
-		SOL_soup = BeautifulSoup(SOL_html, 'html.parser')
-
-
 		# 백준 알고리즘
 		BOJ_URL = "https://www.acmicpc.net/problem/{}".format(prbNum)
 		BOJ_html = get_html(BOJ_URL, {})    # 백준은 dic값 필요 없음
@@ -39,8 +33,13 @@ class Crawl:    # 크롤링 클래스
 		for p in BOJ_soup.select('#problem_description > p'):
 			problem_description.append(p.string)                  # 문제 설명을 문단별로 저장
 
-		problem_tier = SOL_soup.select('a[href = "{0}"] > img'.format(BOJ_URL))[0]['alt']
-		print(problem_tier)
+		# solved ac
+		SOL_URL = "https://solved.ac/search"
+		SOL_html = get_html(SOL_URL, {'query': prbNum})
+		SOL_soup = BeautifulSoup(SOL_html, 'html.parser')
+
+		problem_tier = SOL_soup.select('a[href = "{0}"] > img'.format(BOJ_URL))[0]['alt']   # 티어 저장
+		
 		return {    # 딕셔너리 형태로 데이터 반환
 			'tier': problem_tier,
 			'title': problem_title,
