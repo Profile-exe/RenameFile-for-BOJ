@@ -9,3 +9,7 @@ Change the name of the file when you enter the problem number.
 * **크롤링**: 해당 문제의 페이지를 크롤링하여 필요한 데이터를 얻는다.
 * **파일 I/O**: 얻은 데이터로 파일명을 바꾼다.
 * **GUI**: GUI를 활용하여 편의성을 높인다.
+
+## 방법
+* 문제 번호 및 제목, 설명은 BOJ에서 크롤링
+* 문제 난이도(티어)는 solved ac에서 크롤링
