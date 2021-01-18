@@ -13,3 +13,10 @@ Change the name of the file when you enter the problem number.
 ## 방법
 * 문제 번호 및 제목, 설명은 BOJ에서 크롤링
 * 문제 난이도(티어)는 solved ac에서 크롤링
+
+## TODO
+* ~~입력한 문제 번호에 따라 크롤링~~
+* ~~문제 티어, 제목, 설명 크롤링~~
+* 파일명 바꾸기
+* GUI
+
