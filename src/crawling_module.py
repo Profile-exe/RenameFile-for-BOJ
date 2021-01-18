@@ -2,9 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_html(url, query):  # 해당 사이트의 html 파일을 text로 변환하여 불러온다.
+def get_html(url, param):  # 해당 사이트의 html 파일을 text로 변환하여 불러온다.
 	_html = ""
-	resp = requests.get(url, query)
+	resp = requests.get(url, param)
 	print('주소', resp.url)              # URL 출력
 	if resp.status_code == 200:  # 정상적인 응답 [200] 이면 text로 변환
 		_html = resp.text
