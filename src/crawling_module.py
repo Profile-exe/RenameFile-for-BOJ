@@ -23,10 +23,6 @@ class Crawl:    # 크롤링 클래스
 			print('입력없음, 프로그램 종료')
 			exit(0)
 
-		# todo Solved ac URL에 dic매개변수를 줘서 티어 확인 "problem_tier"에 저장
-		# 키값은 query 매개변수는 문제 번호인 prbNum 이용 ex) params
-		# 티어 셀렉터 : #__next > div.contents > div:nth-child(3) > div:nth-child(2) > div > div.StickyTable__Wrapper-akg1ak-3.cWzfCw.sticky-table > div > div:nth-child(2) > div:nth-child(1) > span > a > img
-
 		# solved ac
 		SOL_URL = "https://solved.ac/search"
 		SOL_html = get_html(SOL_URL, query={'query': prbNum})
@@ -43,7 +39,7 @@ class Crawl:    # 크롤링 클래스
 		for p in BOJ_soup.select('#problem_description > p'):
 			problem_description.append(p.string)                  # 문제 설명을 문단별로 저장
 
-		problem_tier = SOL_soup.select('#__next > div.contents > div:nth-child(3) > div:nth-child(2) > div > div.sticky-table > div.sticky-table-table > div.sticky-table-row > div.sticky-table-cell > span > a[href = "{0}"] > img'.format(BOJ_URL))[0]['alt']
+		problem_tier = SOL_soup.select('a[href = "{0}"] > img'.format(BOJ_URL))[0]['alt']
 		print(problem_tier)
 		return {    # 딕셔너리 형태로 데이터 반환
 			'tier': problem_tier,
