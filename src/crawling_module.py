@@ -24,7 +24,7 @@ class Crawl:    # 크롤링 클래스
 			exit(0)
 
 		# 백준 알고리즘
-		BOJ_URL = "https://www.acmicpc.net/problem/{}".format(prbNum)
+		BOJ_URL = f'https://www.acmicpc.net/problem/{prbNum}'
 		BOJ_html = get_html(BOJ_URL, {})    # 백준은 dic값 필요 없음
 		BOJ_soup = BeautifulSoup(BOJ_html, 'html.parser')
 
@@ -34,7 +34,7 @@ class Crawl:    # 크롤링 클래스
 			problem_description.append(p.string)                  # 문제 설명을 문단별로 저장
 
 		# solved ac
-		SOL_URL = "https://solved.ac/search"
+		SOL_URL = 'https://solved.ac/search'
 		SOL_html = get_html(SOL_URL, {'query': prbNum})
 		SOL_soup = BeautifulSoup(SOL_html, 'html.parser')
 
