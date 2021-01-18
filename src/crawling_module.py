@@ -26,9 +26,9 @@ class Crawl:    # 크롤링 클래스
 		BOJ_html = get_html(BOJ_URL)
 		BOJ_soup = BeautifulSoup(BOJ_html, 'html.parser')
 
-		problem_title = soup.select('#problem_title')[0].string   # 문제 제목 저장
+		problem_title = BOJ_soup.select('#problem_title')[0].string   # 문제 제목 저장
 		problem_description = []
-		for p in soup.select('#problem_description > p'):
+		for p in BOJ_soup.select('#problem_description > p'):
 			problem_description.append(p.string)                  # 문제 설명을 문단별로 저장
 
 		return {    # 딕셔너리 형태로 데이터 반환
