@@ -11,25 +11,11 @@ save_path = r'C:\Users\kang6\Documents\test'  # 이름 변경 후 저장할 경�
 file_names = os.listdir(file_path)  # 해당 디렉토리에 있는 파일명을 리스트로 반환
 
 # 파일의 이름에서 문제 번호 추출
-numbers = []
 for name in file_names:
-	numbers.append(re.findall('\d+', name))
+	prb_num = re.findall('\d+', name)[0]  # 리스트로 반환되므로 안에 있는 str요소를 저장
+	crawl = Crawl(prb_num).contents  # dictionary 형태인 Crawl클래스의 contents 저장
+	extension = name.split('.')[1]  # 파일명의 확장자 유지
 
-print(numbers)
-
-for prb_num in numbers:                # 파일에 있는 문제 번호들을 하나씩 탐색
-	prb_num = prb_num[0]               # 리스트로 반환되므로 안에 있는 str요소를 저장
-	crawl = Crawl(prb_num).contents    # dictionary 형태인 Crawl클래스의 contents 저장
-	# todo 파일의 개수만큼 수행하므로 번호별로 내용 출력해보기 -> test폴더 파일 이름들을 존재하는 문제 번호로 변환
-	print(crawl)
-
-#
-# i = 1
-# for name in file_names:
-# 	extension = '.' + name.split('.')[1]     # 파일명의 확장자 유지
-# 	src = os.path.join(file_path, name)
-# 	# todo 크롤링한 데이터로 파일 명 바꿔보기
-# 	dst = f"{crawl['tier'].split()[0]}_{crawl['title']}_{crawl['description']} + {extension}"
-# 	dst = os.path.join(file_path, dst)
-# 	os.rename(src, dst)
-# 	i += 1
+	src = os.path.join(file_path, name)
+	dst = os.path.join(file_path, f"{crawl['tier'].split()[0]}_{prb_num}_{crawl['title']}.{extension}")
+	os.rename(src, dst)     # 파일명 바꾸기
