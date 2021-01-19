@@ -11,15 +11,15 @@ solved ac : 존재하지 않음
 def get_html(url, param):  # 해당 사이트의 html 파일을 text로 변환하여 불러온다.
 	_html = ""
 	resp = requests.get(url, param)
-	print('주소', resp.url)              # URL 출력
-	if resp.status_code == 200:  # 정상적인 응답 [200] 이면 text로 변환
+	print('주소', resp.url)         # URL 출력
+	if resp.status_code == 200:     # 정상적인 응답 [200] 이면 text로 변환
 		_html = resp.text
 	return _html
 
 
 class Crawl:    # 크롤링 클래스
 
-	def __init__(self, prb_num):
+	def __init__(self, prb_num=10831):
 		self.contents = self.crawling(prb_num)
 
 	@staticmethod
@@ -30,13 +30,13 @@ class Crawl:    # 크롤링 클래스
 
 		# 백준 알고리즘
 		BOJ_URL = f'https://www.acmicpc.net/problem/{prb_num}'
-		BOJ_html = get_html(BOJ_URL, {})    # 백준은 dic값 필요 없음
+		BOJ_html = get_html(BOJ_URL, {})    # 백준은 문제 번호만 필요 -> 빈 딕셔너리 전달
 		BOJ_soup = BeautifulSoup(BOJ_html, 'html.parser')
 
 		problem_title = BOJ_soup.select('#problem_title')[0].string   # 문제 제목 저장
 		problem_description = []
 		for p in BOJ_soup.select('#problem_description > p'):
-			problem_description.append(p.string)                  # 문제 설명을 문단별로 저장
+			problem_description.append(p.string)                      # 문제 설명을 문단별로 저장
 
 		# solved ac
 		SOL_URL = 'https://solved.ac/search'
@@ -58,3 +58,6 @@ class Crawl:    # 크롤링 클래스
 		print('문제 내용 : ')
 		for discript in self.contents['description']:
 			print(' ', discript, end='\n\n')
+
+if __name__ == '__main__':
+	Crawl().print_contents()
