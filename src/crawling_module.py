@@ -1,6 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 
+"""
+robot.txt를 준수
+
+Beakjoon Online Judge : https://www.acmicpc.net/robots.txt
+solved ac : 존재하지 않음
+"""
 
 def get_html(url, param):  # 해당 사이트의 html 파일을 text로 변환하여 불러온다.
 	_html = ""

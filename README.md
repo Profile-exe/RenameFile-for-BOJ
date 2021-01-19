@@ -23,3 +23,5 @@ Change the name of the file when you enter the problem number.
 * 파일안에 해당 문제의 주소 및 알고리즘 주석으로 추가하기 
 * PyQt5를 이용해 GUI 구현
 
+## ❗robots.txt❗
+* 해당 프로젝트는 Beakjoon Online Judge의 https://www.acmicpc.net/robots.txt 에 서술된 **robots.txt**를 준수합니다.
