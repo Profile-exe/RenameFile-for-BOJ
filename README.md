@@ -2,7 +2,7 @@
 Change the name of the file when you enter the problem number.
 
 ## ❗robots.txt❗
-* 해당 프로젝트는 Beakjoon Online Judge의 https://www.acmicpc.net/robots.txt 에 서술된 **robots.txt**를 준수합니다.
+* 해당 프로젝트는 Baekjoon Online Judge의 https://www.acmicpc.net/robots.txt 에 서술된 **robots.txt**를 준수합니다.
 
 ## 동기
  문제를 해결한 뒤 소스코드를 저장할 때, 해당 문제의 난이도(solved ac기준)와 문제 제목을 매번 쳐주기 귀찮았다.\
