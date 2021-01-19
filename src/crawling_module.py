@@ -13,14 +13,13 @@ def get_html(url, param):  # 해당 사이트의 html 파일을 text로 변환�
 
 class Crawl:    # 크롤링 클래스
 
-	def __init__(self):
-		self.contents = self.crawling()
+	def __init__(self, prb_num):
+		self.contents = self.crawling(prb_num)
 
 	@staticmethod
-	def crawling():     # 크롤링 메소드
-		prbNum = input('문제번호 : ')
+	def crawling(prbNum):     # 크롤링 메소드
 		if prbNum == '':
-			print('입력없음, 프로그램 종료')
+			print('문제번호가 존재하지 않습니다. 프로그램 종료')
 			exit(0)
 
 		# 백준 알고리즘
