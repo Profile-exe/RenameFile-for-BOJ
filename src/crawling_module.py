@@ -17,13 +17,13 @@ class Crawl:    # 크롤링 클래스
 		self.contents = self.crawling(prb_num)
 
 	@staticmethod
-	def crawling(prbNum):     # 크롤링 메소드
-		if prbNum == '':
+	def crawling(prb_num):     # 크롤링 메소드
+		if prb_num == '':
 			print('문제번호가 존재하지 않습니다. 프로그램 종료')
 			exit(0)
 
 		# 백준 알고리즘
-		BOJ_URL = f'https://www.acmicpc.net/problem/{prbNum}'
+		BOJ_URL = f'https://www.acmicpc.net/problem/{prb_num}'
 		BOJ_html = get_html(BOJ_URL, {})    # 백준은 dic값 필요 없음
 		BOJ_soup = BeautifulSoup(BOJ_html, 'html.parser')
 
@@ -34,7 +34,7 @@ class Crawl:    # 크롤링 클래스
 
 		# solved ac
 		SOL_URL = 'https://solved.ac/search'
-		SOL_html = get_html(SOL_URL, {'query': prbNum})
+		SOL_html = get_html(SOL_URL, {'query': prb_num})
 		SOL_soup = BeautifulSoup(SOL_html, 'html.parser')
 
 		problem_tier = SOL_soup.select(f'a[href = "{BOJ_URL}"] > img')[0]['alt']   # 티어 저장
