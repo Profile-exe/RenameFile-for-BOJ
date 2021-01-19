@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 """
 robot.txt를 준수
 
-Beakjoon Online Judge : https://www.acmicpc.net/robots.txt
+Baekjoon Online Judge : https://www.acmicpc.net/robots.txt
 solved ac : 존재하지 않음
 """
 
