@@ -25,3 +25,7 @@ Change the name of the file when you enter the problem number.
 * 크롤링 최적화 [Multiprocessing] 
 * 파일안에 해당 문제의 주소 및 알고리즘 주석으로 추가하기 
 * PyQt5를 이용해 GUI 구현
+
+### 수행 시간 단축에 관해
+<p>&nbsp;requests.get()은 네트워크 연산이므로 수행 시간을 단축시키기 힘들다.
+따라서, 파일 개수에 따라 multiprocessing을 통해 크롤링 이후의 처리를 단축시키는 방법을 이용해야 한다.</p>
