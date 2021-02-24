@@ -54,5 +54,6 @@ class Crawl:    # 크롤링 클래스
 		print('티어 :', self.contents['tier'], end='\n\n')
 		print('문제 이름 : ', self.contents['title'], end='\n\n')
 
+
 if __name__ == '__main__':  # 크롤링 정상 작동 확인용
 	Crawl().print_contents()
