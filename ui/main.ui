@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RFB</class>
+ <widget class="QWidget" name="RFB">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1030</width>
+    <height>587</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Rename File for BOJ</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
