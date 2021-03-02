@@ -2,7 +2,7 @@ import os
 import re
 from crawling_module import Crawl
 
-file_path = r'C:\Users\kang6\Documents\test'         # IDE workspace 경로
+file_path = r'C:\Users\kang6\Documents\test'         # Source File 경로
 workspace_path = r'C:\Users\kang6\Documents\test'    # IDE workspace 경로
 save_path = r'C:\Users\kang6\Documents\test'         # 이름 변경 후 저장할 경로
 
