@@ -6,7 +6,7 @@ from PyQt5 import uic
 class Form(QtWidgets.QDialog):
 	def __init__(self, parent=None):
 		QtWidgets.QDialog.__init__(self, parent)
-		self.ui = uic.loadUi('../ui/test.ui')
+		self.ui = uic.loadUi('../ui/main.ui')
 		self.ui.show()
 
 

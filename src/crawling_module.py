@@ -34,7 +34,9 @@ class Crawl:  # 크롤링 클래스
         BOJ_soup = BeautifulSoup(BOJ_html, 'html.parser')
 
         problem_title = BOJ_soup.select('#problem_title')[0].string  # 문제 제목 저장
-        problem_description = BOJ_soup.select('#problem_description')[0].string  # 문제 설명 저장
+        problem_description = []
+        for p in BOJ_soup.select('#problem_description > p'):
+            problem_description.append(p.string)  # 문제 설명을 문단별로 저장
 
         # solved ac
         SOL_URL = 'https://solved.ac/search'
@@ -53,7 +55,11 @@ class Crawl:  # 크롤링 클래스
         print()
         print('티어 :', self.contents['tier'], end='\n\n')
         print('문제 이름 : ', self.contents['title'], end='\n\n')
+        print('문제 설명 : ')
+        for discript in self.contents['description']:
+            print(' ', discript, end='\n\n')
 
 
 if __name__ == '__main__':  # 크롤링 정상 작동 확인용
-    Crawl().print_contents()
+    prb_num = int(input('문제 번호 : '))
+    Crawl(prb_num).print_contents()
