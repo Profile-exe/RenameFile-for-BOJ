@@ -1,12 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 
-"""
-robot.txt를 준수
 
-Baekjoon Online Judge : https://www.acmicpc.net/robots.txt
-solved ac : robots.txt가 존재하지 않음
-"""
+###############################################################
+# robot.txt를 준수                                             #
+#                                                             #
+# Baekjoon Online Judge : https://www.acmicpc.net/robots.txt  #
+# Solved ac : There isn't robots.txt                          #
+###############################################################
 
 def get_html(url: str, param: dict) -> str:  # 해당 사이트의 html 파일을 text로 변환하여 불러온다.
     _html = ""
@@ -19,7 +20,7 @@ def get_html(url: str, param: dict) -> str:  # 해당 사이트의 html 파일�
 
 class Crawl:  # 크롤링 클래스
 
-    def __init__(self, prb_num=10831):
+    def __init__(self, prb_num: int = 10831):
         self.contents: dict = self.crawling(prb_num)
 
     @staticmethod
