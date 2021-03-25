@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+# from selenium import webdriver
 
+# driver = webdriver.Chrome('C:\\Users\\kang6\\OneDrive\\동아리-Devsign\\프로젝트\\chromedriver.exe')
 
 ###############################################################
 # robot.txt를 준수                                             #
@@ -50,6 +52,7 @@ class Crawl:  # 크롤링 클래스
             'tier': problem_tier,
             'title': problem_title,
             'description': problem_description
+            # todo selenium을 이용해 알고리즘 분류 크롤링
         }
 
     def print_contents(self):
