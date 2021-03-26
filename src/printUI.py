@@ -16,29 +16,32 @@ class MainDialog(QDialog):
         QDialog.__init__(self, None)
         uic.loadUi(RFB_UI, self)
 
+        self.prb_num = 0
+        self.crawl: Crawl = None
+
         self.sourceName: str = ""        # 소스파일 이름 [절대경로]
         self.dirName: str = ""           # 저장폴더 이름 [절대경로]
-        self.contents: Crawl             # 크롤링 정보 저장
-        self.setFixedSize(570, 610)
+        self.setFixedSize(570, 630)      # 위젯 크기 고정
 
         self.fileLocation_pushButton.clicked.connect(self.FileButtonClicked)
         self.dirLocation_pushButton.clicked.connect(self.DirButtonClicked)
         self.start_pushButton.clicked.connect(self.StartButtonClicked)
 
-    def FileButtonClicked(self):
+    def FileButtonClicked(self):    # 파일 선택 버튼 슬롯
         fname: tuple = QFileDialog.getOpenFileName(self, "소스파일 선택", options=QFileDialog.DontResolveSymlinks)
         self.fileLocation_textBrowser.setText(fname[0])
         self.sourceName = fname[0]
 
-    def DirButtonClicked(self):
+    def DirButtonClicked(self):     # 폴더 선택 버튼 슬롯
         fname: str = QFileDialog.getExistingDirectory(self, "저장할 폴더 선택", options=QFileDialog.ShowDirsOnly)
         self.dirLocation_textBrowser.setText(fname)
         self.dirName = fname
 
-    def StartButtonClicked(self):
-        prb_num = int(input('문제 번호 입력 : '))
-        self.crawl = Crawl(prb_num)
-        self.prbNum_textBrowser.setText(str(prb_num))
+    def StartButtonClicked(self):   # 시작 버튼 슬롯
+        self.prb_num = int(input('문제 번호 입력 : '))
+        self.crawl = Crawl(self.prb_num)
+
+        self.prbNum_textBrowser.setText(str(self.crawl.contents['num']))
         self.prbTier_textBrowser.setText(self.crawl.contents['tier'])
         self.prbName_textBrowser.setText(self.crawl.contents['title'])
         self.discription_textBrowser.setText(' ' + '\n\n '.join(self.crawl.contents['description']))
