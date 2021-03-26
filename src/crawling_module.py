@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+
+
 # from selenium import webdriver
 
 # driver = webdriver.Chrome('C:\\Users\\kang6\\OneDrive\\동아리-Devsign\\프로젝트\\chromedriver.exe')
@@ -11,52 +13,60 @@ from bs4 import BeautifulSoup
 # Solved ac : There isn't robots.txt                          #
 ###############################################################
 
-def get_html(url: str, param: dict) -> str:  # 해당 사이트의 html 파일을 text로 변환하여 불러온다.
-    _html = ""
-    resp = requests.get(url, param)
-    if resp.status_code == 200:  # 정상적인 응답 [200] 이면 text로 변환
-        _html = resp.text
-    print('주소', resp.url)  # URL 출력
-    return _html
-
-
 class Crawl:  # 크롤링 클래스
 
     def __init__(self, prb_num: int = 10831):
-        self.contents: dict = self.crawling(prb_num)
+        self.prb_num = prb_num
+        self.contents: dict = {
+            'num': self.prb_num,
+            'tier': "",
+            'title': "",
+            'description': []
+        }
 
-    @staticmethod
-    def crawling(prb_num: int) -> dict:  # 크롤링 메소드
-        if prb_num == '':
+        self.BOJ_URL = f'https://www.acmicpc.net/problem/{self.prb_num}'  # BOJ 주소
+        self.SOL_URL = 'https://solved.ac/search'  # Solved.ac 주소
+
+        self.BOJ_resp = requests.get(self.BOJ_URL, {})
+        self.SOL_resp = requests.get(self.SOL_URL, {'query': self.prb_num})
+
+        # 파싱된 html 문서를 담을 변수
+        self.BOJ_soup = ""
+        self.SOL_soup = ""
+
+        self.crawling()     # 크롤링 시작
+
+    def check_state_code(self) -> bool:  # request가 정상적으로 작동했는지 확인
+        if self.BOJ_resp.status_code != 200 or self.SOL_resp.status_code != 200:
+            raise Exception('ERROR: 404 Not Found')
+        else:
+            return True
+
+    def crawling(self):  # 크롤링 메소드
+        try:
+            if self.check_state_code() is True:  # 정상적인 응답이면 parsing 후 저장
+                self.BOJ_soup = BeautifulSoup(self.BOJ_resp.text, 'html.parser')
+                self.SOL_soup = BeautifulSoup(self.SOL_resp.text, 'html.parser')
+        except Exception as err:
+            self.contents['num'] = err.args[0]    # 예외 메시지를 문제 번호란에 저장
+            self.contents['title'] = '존재하지 않는 문제번호입니다.'
+            print(err)
+            return
+
+        if self.prb_num == '':
             print('문제번호가 존재하지 않습니다. 프로그램 종료')
             exit(0)
 
-        # 백준 알고리즘
-        BOJ_URL = f'https://www.acmicpc.net/problem/{prb_num}'
-        BOJ_html = get_html(BOJ_URL, {})  # 백준은 문제 번호만 필요 -> 빈 딕셔너리 전달
-        BOJ_soup = BeautifulSoup(BOJ_html, 'html.parser')
+        self.contents['title'] = self.BOJ_soup.select('#problem_title')[0].string  # 문제 제목 저장
 
-        problem_title = BOJ_soup.select('#problem_title')[0].string  # 문제 제목 저장
-        problem_description = []
-        for p in BOJ_soup.select('#problem_description > p'):
-            problem_description.append(p.text)  # 문제 설명을 문단별로 저장
+        self.contents['description'] = []  # 문제 설명을 문단별로 저장
+        for p in self.BOJ_soup.select('#problem_description > p'):
+            self.contents['description'].append(p.text)
 
-        # solved ac
-        SOL_URL = 'https://solved.ac/search'
-        SOL_html = get_html(SOL_URL, {'query': prb_num})
-        SOL_soup = BeautifulSoup(SOL_html, 'html.parser')
+        self.contents['tier'] = \
+            self.SOL_soup.select(f'a[href = "{self.BOJ_URL}"] > img')[0]['alt']  # 티어 저장
 
-        problem_tier = SOL_soup.select(f'a[href = "{BOJ_URL}"] > img')[0]['alt']  # 티어 저장
-
-        return {  # 딕셔너리 형태로 데이터 반환
-            'tier': problem_tier,
-            'title': problem_title,
-            'description': problem_description
-            # todo selenium을 이용해 알고리즘 분류 크롤링
-        }
-
-    def print_contents(self):
-        print()
+    def print_contents(self):   # 크롤링 정상 작동 확인용 메소드
         print('티어 :', self.contents['tier'], end='\n\n')
         print('문제 이름 : ', self.contents['title'], end='\n\n')
         print('문제 설명 : ')
