@@ -34,7 +34,7 @@ class Crawl:  # 크롤링 클래스
         self.BOJ_soup = ""
         self.SOL_soup = ""
 
-        self.crawling()     # 크롤링 시작
+        self.get_data()     # 크롤링 시작
 
     def check_state_code(self) -> bool:  # request가 정상적으로 작동했는지 확인
         if self.BOJ_resp.status_code != 200 or self.SOL_resp.status_code != 200:
@@ -42,29 +42,28 @@ class Crawl:  # 크롤링 클래스
         else:
             return True
 
-    def crawling(self):  # 크롤링 메소드
+    def parsing_html(self) -> bool:     # 응답 코드(request.stae_code()) 체크 후 parsing
         try:
             if self.check_state_code() is True:  # 정상적인 응답이면 parsing 후 저장
                 self.BOJ_soup = BeautifulSoup(self.BOJ_resp.text, 'html.parser')
                 self.SOL_soup = BeautifulSoup(self.SOL_resp.text, 'html.parser')
+                return True
         except Exception as err:
             self.contents['num'] = err.args[0]    # 예외 메시지를 문제 번호란에 저장
             self.contents['title'] = '존재하지 않는 문제번호입니다.'
             print(err)
-            return
+            return False
 
-        if self.prb_num == '':
-            print('문제번호가 존재하지 않습니다. 프로그램 종료')
-            exit(0)
+    def get_data(self):  # 크롤링 메소드
+        if self.parsing_html():     #
+            self.contents['title'] = self.BOJ_soup.select('#problem_title')[0].string  # 문제 제목 저장
 
-        self.contents['title'] = self.BOJ_soup.select('#problem_title')[0].string  # 문제 제목 저장
+            self.contents['description'] = []  # 문제 설명을 문단별로 저장
+            for p in self.BOJ_soup.select('#problem_description > p'):
+                self.contents['description'].append(p.text)
 
-        self.contents['description'] = []  # 문제 설명을 문단별로 저장
-        for p in self.BOJ_soup.select('#problem_description > p'):
-            self.contents['description'].append(p.text)
-
-        self.contents['tier'] = \
-            self.SOL_soup.select(f'a[href = "{self.BOJ_URL}"] > img')[0]['alt']  # 티어 저장
+            self.contents['tier'] = \
+                self.SOL_soup.select(f'a[href = "{self.BOJ_URL}"] > img')[0]['alt']  # 티어 저장
 
     def print_contents(self):   # 크롤링 정상 작동 확인용 메소드
         print('티어 :', self.contents['tier'], end='\n\n')
