@@ -49,8 +49,8 @@ class Crawl:  # 크롤링 클래스
                 self.SOL_soup = BeautifulSoup(self.SOL_resp.text, 'html.parser')
                 return True
         except Exception as err:
-            self.contents['num'] = err.args[0]    # 예외 메시지를 문제 번호란에 저장
-            self.contents['title'] = '존재하지 않는 문제번호입니다.'
+            self.contents['num'] = '존재하지 않는 문제번호입니다.'
+            self.contents['title'] = err.args[0]    # 예외 메시지를 문제 제목란에 저장
             print(err)
             return False
 
