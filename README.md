@@ -27,7 +27,7 @@ Change the name of the file when you enter the problem number.
 - 멀티 프로세싱을 통해 수행시간 줄이기 
 
 ## Operating Structure
-<img src='./img/Operating Structure.jpeg'>
+<img src='./img/Operating Structure.jpg'>
 
 ### 수행 시간 단축에 관해
 <p>&nbsp;requests.get()은 네트워크 연산이므로 수행 시간을 단축시키기 힘들다.
