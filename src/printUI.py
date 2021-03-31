@@ -17,7 +17,7 @@ class MainDialog(QDialog):
         uic.loadUi(RFB_UI, self)
 
         self.prb_num = 0
-        self.crawl: Crawl = None
+        self.contents: dict = {}
 
         self.sourceName: str = ""        # 소스파일 이름 [절대경로]
         self.dirName: str = ""           # 저장폴더 이름 [절대경로]
@@ -39,12 +39,12 @@ class MainDialog(QDialog):
 
     def StartButtonClicked(self):   # 시작 버튼 슬롯
         self.prb_num = int(input('문제 번호 입력 : '))
-        self.crawl = Crawl(self.prb_num)
+        self.contents: dict = Crawl(self.prb_num).contents
 
-        self.prbNum_textBrowser.setText(str(self.crawl.contents['num']))
-        self.prbTier_textBrowser.setText(self.crawl.contents['tier'])
-        self.prbName_textBrowser.setText(self.crawl.contents['title'])
-        self.discription_textBrowser.setText(' ' + '\n\n '.join(self.crawl.contents['description']))
+        self.prbNum_textBrowser.setText(str(self.contents['num']))
+        self.prbTier_textBrowser.setText(self.contents['tier'])
+        self.prbName_textBrowser.setText(self.contents['title'])
+        self.discription_textBrowser.setText(' ' + '\n\n '.join(self.contents['description']))
 
     """
     label.setText('<a href="http://stackoverflow.com/">Link</a>')
