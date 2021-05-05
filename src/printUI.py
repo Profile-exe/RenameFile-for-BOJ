@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import re
 from crawling_module import Crawl
 
 import PyQt5
@@ -38,13 +39,25 @@ class MainDialog(QDialog):
         self.dirName = fname
 
     def StartButtonClicked(self):   # 시작 버튼 슬롯
-        self.prb_num = int(input('문제 번호 입력 : '))
-        self.contents: dict = Crawl(self.prb_num).contents
+        # 문제 번호를 소스파일의 맨 첫번째 목록에서 읽어온다.
+        if self.dirName == '' or self.sourceName == '':   # 파일 위치 또는 저장위치가 선택되지 않은 경우
+            self.prbNum_textBrowser.setText('파일위치 또는 저장위치 미선택')
+            return
 
+        self.changeFile()   # 파일 이름 변경 후 선택된 폴더에 저장
+        self.showData()     # 정보 출력
+
+    def showData(self):             # GUI로 정보 출력 함수
         self.prbNum_textBrowser.setText(str(self.contents['num']))
         self.prbTier_textBrowser.setText(self.contents['tier'])
         self.prbName_textBrowser.setText(self.contents['title'])
         self.discription_textBrowser.setText(' ' + '\n\n '.join(self.contents['description']))
+
+    def changeFile(self):
+        with open(self.sourceName, 'w') as f:
+            self.prb_num = re.findall('\d+', f.readline())[0]       # 소스파일 맨 첫 번째 줄에서 문제번호 읽고 저장
+            self.contents: dict = Crawl(self.prb_num).contents      # 해당 번호로 크롤링
+            extension = self.sourceName.split('.')[-1]              # 파일명의 확장자 유지
 
     """
     label.setText('<a href="http://stackoverflow.com/">Link</a>')
