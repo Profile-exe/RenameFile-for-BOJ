@@ -25,7 +25,7 @@ Change the name of the file when you enter the problem number.
 - 파일을 특정 디렉토리로 복사 및 이름 바꾸기 
 - 파일안에 해당 문제의 주소 및 알고리즘 주석으로 추가하기 
 - 멀티 프로세싱을 통해 수행시간 줄이기 
-
+~~~~
 ## Operating Structure
 <img src='./img/Operating Structure.png' alt="operating structure">
 

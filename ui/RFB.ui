@@ -291,29 +291,31 @@ QPushButton:hover {
         </layout>
        </item>
        <item>
-        <widget class="QPushButton" name="start_pushButton">
-         <property name="minimumSize">
-          <size>
-           <width>70</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>70</width>
-           <height>110</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>맑은 고딕</family>
-           <pointsize>12</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QPushButton" name="start_pushButton">
+           <property name="minimumSize">
+            <size>
+             <width>70</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>70</width>
+             <height>110</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>맑은 고딕</family>
+             <pointsize>12</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
 	border: 2px solid rgb(189, 189, 189);
 	border-radius: 10px;
 }
@@ -322,11 +324,46 @@ QPushButton:hover {
 	background-color: rgb(106, 106, 106);
 }
 </string>
-         </property>
-         <property name="text">
-          <string>시작</string>
-         </property>
-        </widget>
+           </property>
+           <property name="text">
+            <string>시작</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="changeAll_pushButton">
+           <property name="maximumSize">
+            <size>
+             <width>70</width>
+             <height>110</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Malgun Gothic</family>
+             <pointsize>13</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	border: 2px solid rgb(189, 189, 189);
+	border-radius: 10px;
+}
+
+QPushButton:hover {
+	background-color: rgb(106, 106, 106);
+}
+</string>
+           </property>
+           <property name="text">
+            <string>모두
+변경</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>

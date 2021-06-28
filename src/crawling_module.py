@@ -55,7 +55,7 @@ class Crawl:  # 크롤링 클래스
             return False
 
     def get_data(self):  # 크롤링 메소드
-        if self.parsing_html():     #
+        if self.parsing_html():
             self.contents['title'] = self.BOJ_soup.select('#problem_title')[0].string  # 문제 제목 저장
 
             self.contents['description'] = []  # 문제 설명을 문단별로 저장
