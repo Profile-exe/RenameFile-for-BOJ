@@ -11,12 +11,24 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
-RFB_UI = '../ui/RFB.ui'
 
-class MainDialog(QDialog):
+# Define function to import external files when using PyInstaller.
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+RFB_UI = 'RFB.ui'
+ui_path = resource_path(RFB_UI)
+form_class = uic.loadUiType(ui_path)[0]
+
+ICON = '..\\img\\icon.ico'
+icon_path = resource_path(ICON)
+
+class MainDialog(QDialog, form_class):
     def __init__(self):
-        QDialog.__init__(self, None)
-        uic.loadUi(RFB_UI, self)
+        super().__init__()
+        self.setupUi(self)
 
         self.prb_num = 0
         self.contents: dict = {}
