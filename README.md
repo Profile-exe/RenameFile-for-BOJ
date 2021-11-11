@@ -23,8 +23,8 @@ Change the name of the file when you enter the problem number.
 - ~~문제 티어, 제목, 설명 크롤링~~
 - ~~특정 디렉토리에 있는 파일명 한꺼번에 바꾸기~~
 - ~~파일을 특정 디렉토리로 복사 및 이름 바꾸기 ~~
-- 멀티 프로세싱을 통해 수행시간 줄이기 
-~~~~
+- 멀티 프로세싱을 통해 수행시간 줄이기
+
 ## Operating Structure
 <img src='./img/Operating Structure.png' alt="operating structure">
 
